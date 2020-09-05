@@ -73,7 +73,7 @@ As you can see, you get to skip a lot of tasks you would normally perform to use
   - To load, `glove = GloVe.load('filename.pkl')`
 - ...
 
-You can choose to use other bigger GloVe datasets like below:
+You can choose to use one of the other bigger GloVe weights like below:
 
 ```
 >>> glove = GloVe(300, '42B.300d')
