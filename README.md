@@ -42,12 +42,12 @@ array([[-0.18173   ,  0.49759001,  0.46325999, ..., -0.23394001,
 
 As you can see, you get to skip a lot of tasks you would normally perform to use pretrained embedding weights such as:
 
-- Downloading the dataset and caching it
+- Downloading the weights and caching it
   - Required files will be downloaded and cached under `~/.cache/data-toolbox/`.
-- Building your own word list
+- Building the wordlist/vocabulary from your dataset
   - Accessible by `glove.tokens`
   - You can give it initial or special tokens (`initial_tokens`)
-  - It will build the wordlist automatically if you tokenize your texts with `glove.tokenize(..., discover_tokens=True)` or `glove.fit(...)`
+  - It builds the wordlist automatically if you tokenize your texts with `glove.tokenize(..., discover_tokens=True)` or `glove.fit(...)`
 - Choosing the maximum size of a vector based on your dataset
   - Accessible by `glove.max_length`
   - You can give it a initial length (`max_length`)
