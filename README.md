@@ -1,4 +1,4 @@
-# data-toolbox
+# 🌇 data-toolbox
 
 data-toolbox is a collection of data science/machine learning utilities for myself. The goal is to automate trivial tasks so I can re-iterate on data projects faster.
 
