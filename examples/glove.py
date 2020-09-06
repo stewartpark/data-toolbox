@@ -1,4 +1,4 @@
-from data_toolbox.glove import GloVe
+from data_toolbox.preprocessing.glove import GloVe
 import sys
 sys.path.append('.')
 

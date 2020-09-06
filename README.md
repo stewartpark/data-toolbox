@@ -16,7 +16,7 @@ pip install git+https://github.com/stewartpark/data-toolbox
 Training an embedding layer in NLP is expensive, and using pre-trained embedding weights involves a number of tasks to be done in order to plug it into your model. Now it's as simple as below:
 
 ```
->>> from data_toolbox.glove import GloVe
+>>> from data_toolbox.preprocessing.glove import GloVe
 >>> glove = GloVe()
 [+] Downloading http://nlp.stanford.edu/data/glove.6B.zip...
 100%|███████████████████████████████████████| 862M/862M [06:26<00:00, 2.23MiB/s]
