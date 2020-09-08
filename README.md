@@ -94,9 +94,9 @@ You can choose to use one of the other bigger GloVe weights like below:
   - If you wrap a layer with this, you can duplicate multiple layers that attach to the same parent.
   - `layer` can be a list of layers with different configurations. In such case, `n_heads` doesn't need to be specified.
 - `PositionalEncoder(max_length, dtype='float32')`
-  - If you add this layer to your model after an embedding layer, this will add positional encoded values to the output of each embedding output.
+  - If you add this layer to your model after an embedding layer, this will add positionally encoded sinusoidal values to the output of each embedding output.
   - `max_length` is the maximum length possible for your sequence input.
-  - Positional encoding Keras layer implementation described in [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+  - Positional encoding Keras layer implementation described in [Attention Is All You Need](https://arxiv.org/abs/1706.03762).
 
 - Examples
   - [deep_xor.py](https://github.com/stewartpark/data-toolbox/blob/master/examples/deep_xor.py) (Residual, Dropout)
