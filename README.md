@@ -86,14 +86,14 @@ You can choose to use one of the other bigger GloVe weights like below:
 
 ## Keras Utility Layers
 
-- `Residual(layer, n_outputs=None, choose=0, normalization_layer_class=tf.keras.layers.LayerNormalization, normalization_layer_options={})`
+- [`Residual`](https://github.com/stewartpark/data-toolbox/blob/master/data_toolbox/nn_layers/__init__.py)`(layer, n_outputs=None, choose=0, normalization_layer_class=tf.keras.layers.LayerNormalization, normalization_layer_options={})`
   - If you wrap a layer with this, it wraps a skip connection around it
-- `Dropout(layer, rate=0.2)`
+- [`Dropout`](https://github.com/stewartpark/data-toolbox/blob/master/data_toolbox/nn_layers/__init__.py)`(layer, rate=0.2)`
   - If you wrap a layer with this, it adds a drop out layer after the layer specified.
-- `MultiHead(layer, n_heads)`
+- [`MultiHead`](https://github.com/stewartpark/data-toolbox/blob/master/data_toolbox/nn_layers/__init__.py)`(layer, n_heads)`
   - If you wrap a layer with this, you can duplicate multiple layers that attach to the same parent.
   - `layer` can be a list of layers with different configurations. In such case, `n_heads` doesn't need to be specified.
-- `PositionalEncoder(max_length, dtype='float32')`
+- [`PositionalEncoder`](https://github.com/stewartpark/data-toolbox/blob/master/data_toolbox/nn_layers/positional_encoder.py)`(max_length, dtype='float32')`
   - If you add this layer to your model after an embedding layer, this will add positionally encoded sinusoidal values to the output of each embedding output.
   - `max_length` is the maximum length possible for your sequence input.
   - Positional encoding Keras layer implementation described in [Attention Is All You Need](https://arxiv.org/abs/1706.03762).
