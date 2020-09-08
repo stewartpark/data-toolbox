@@ -81,6 +81,9 @@ You can choose to use one of the other bigger GloVe weights like below:
 ...
 ```
 
+- Examples
+  - [glove.py](https://github.com/stewartpark/data-toolbox/blob/master/examples/glove.py)
+
 ## Keras Utility Layers
 
 - `Residual(layer, n_outputs=None, choose=0, normalization_layer_class=tf.keras.layers.LayerNormalization, normalization_layer_options={})`
