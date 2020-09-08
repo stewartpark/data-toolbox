@@ -87,5 +87,10 @@ You can choose to use one of the other bigger GloVe weights like below:
   - If you wrap a layer with this, it wraps a skip connection around it
 - `Dropout(layer, rate=0.2)`
   - If you wrap a layer with this, it adds a drop out layer after the layer specified.
+- `MultiHead(layer, n_heads)`
+  - If you wrap a layer with this, you can duplicate multiple layers that attach to the same parent.
+  - `layer` can be a list of layers with different configurations. In such case, `n_heads` doesn't need to be specified.
 - Examples
   - [deep_xor.py](https://github.com/stewartpark/data-toolbox/blob/master/examples/deep_xor.py) (Residual, Dropout)
+  - [multihead.py](https://github.com/stewartpark/data-toolbox/blob/master/examples/multihead.py) (MultiHead)
+ 
