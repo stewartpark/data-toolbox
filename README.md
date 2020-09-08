@@ -80,3 +80,12 @@ You can choose to use one of the other bigger GloVe weights like below:
 [+] Downloading http://nlp.stanford.edu/data/glove.42B.300d.zip...
 ...
 ```
+
+## Keras Utility Layers
+
+- `Residual(layer, n_outputs=None, choose=0, normalization_layer_class=tf.keras.layers.LayerNormalization, normalization_layer_options={})`
+  - If you wrap a layer with this, it wraps a skip connection around it
+- `Dropout(layer, rate=0.2)`
+  - If you wrap a layer with this, it adds a drop out layer after the layer specified.
+- Examples
+  - [deep_xor.py](https://github.com/stewartpark/data-toolbox/blob/master/examples/deep_xor.py) (Residual, Dropout)

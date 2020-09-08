@@ -73,7 +73,7 @@ class GloVe:
         self._tokens.append(token)
         self._tokens_map[token] = len(self._tokens_map)
 
-    def tokenize(self, text, discover_tokens=False, adjust_max_length=False):
+    def tokenize(self, text, discover_tokens=False, adjust_max_length=False, ignore_undiscoverable_tokens=False):
         if self._compiled and (discover_tokens or adjust_max_length):
             raise Exception(
                 'Invalid options: this GloVe object is already compiled.')
@@ -83,35 +83,45 @@ class GloVe:
             if text[i] in ignore_token:
                 i += 1
                 continue
+
             for l in reversed(range(1, self._max_token_length + 1)):
                 candidate = text[i:i + l]
                 if candidate.lower() in self._tokens_map:  # Case: already learned
                     token = candidate.lower()
+                    break
                 elif candidate.lower() in self._glove_lookup_table:  # Case: in GloVe
                     token = candidate.lower()
+                    break
                 elif candidate in self._tokens_map:  # Case: special token
                     token = candidate
-                else:
+                    break
+            else:  # Case: not in GloVe/wordlist
+                if ignore_undiscoverable_tokens or self._compiled:
+                    tokens.append(self._unknown_token)
+                    if not self._compiled:
+                        self._unknown_tokens.append(text[i])
+                    i += 1
                     continue
+                else:
+                    raise Exception(
+                        f'Token not in GloVe: {text[i:i + self._max_token_length + 1]}. Try adding it to initial_tokens or use .tokenize(..., ignore_undiscoverable_tokens=True) to make it unknown.')
 
-                # Missing word in the user wordlist
-                if token not in self._tokens_map:
-                    if discover_tokens:
-                        self.add_token(token)
-                    elif not self._compiled:
-                        raise Exception(
-                            f'Token not in self.tokens: {token}. Try adding .tokenize(..., discover_tokens=True) if the word list is not finalized.')
-                    else:
-                        # TODO: find the closest word in the user wordlist via cosine similarity.
-                        # Otherwise, this means that the word we just observed wasn't part of the train dataset, but it's in GloVe.
-                        token = self._unknown_token
-                tokens.append(token)
-                i += len(token)
-                break
-            else:
-                self._unknown_tokens.append(text[i])
-                tokens.append(self._unknown_token)
-                i += 1
+            # Missing word in the user wordlist
+            if token not in self._tokens_map:
+                if discover_tokens:
+                    self.add_token(token)
+                elif not self._compiled:
+                    raise Exception(
+                        f'Token not in self.tokens: {token}. Try adding .tokenize(..., discover_tokens=True) if the word list is not finalized.')
+                else:
+                    # TODO: find the closest word in the user wordlist via cosine similarity.
+                    # Otherwise, this means that the word we just observed wasn't part of the train dataset, but it's in GloVe.
+                    token = self._unknown_token
+
+            # Add token to the list
+            tokens.append(token)
+            i += len(token)
+
         if adjust_max_length:
             self.max_length = max(self.max_length, len(tokens))
         return tokens
@@ -179,8 +189,8 @@ class GloVe:
             self.embedding_dim,
             embeddings_initializer=initializers.Constant(
                 self._embedding_matrix),
-            mask_zero=True,
-            trainable=False,
+            mask_zero=kwargs.pop('mask_zero', True),
+            trainable=kwargs.pop('trainable', False),
             **kwargs,
         )
     # END
