@@ -1,9 +1,10 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # noqa
+
 import numpy as np
 from tensorflow.keras.layers import Input, Dense
 from tensorflow.keras.models import Model
 from data_toolbox.nn_layers import Residual as NNResidual, Dropout
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 
 # XOR
